@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="{{ url_for('static', filename='bootstrap-3.3.6-dist/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='lib/angular-1.5.5/angular.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='socket.io.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='ngSocket.js') }}"></script> 
+    <script src="{{ url_for('static', filename='loungApp.js') }}"></script> 
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script> 
+    <script src="{{ url_for('static', filename='bootstrap-3.3.6-dist/js/bootstrap.min.js') }}"></script>
+
+    <style type="text/css">
+      body { background-color: #333333; color: #cccccc; }
+      .btn-primary { background-color: #880000; border-color: #880000; }
+      .btn-primary:hover { background-color: #550000; border-color: #550000; }
+      .navbar { background-color: #333333; border-color: #333333; }
+      .listUser {  }
+      .detailUser { color: #ffffff; }
+      .panel { background-color: #333333; height: 600px; }
+    </style>
+
+    <title>Passager connecte Lounge</title>
+  </head>
+
+  <body ng-app="loungApp" ng-controller="LoungController">
+    <div ng-view>
+      <h1><center>Passager connecte : Lounge<center></h1>
+      <nav class="navbar navbar-default">
+        <form class="navbar-form navbar-left" role="search" ng-submit="sendTagId()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Id" ng-model="tagId">
+          </div>
+          <button type="submit" class="btn btn-default">Send</button>
+        </form>
+      </nav>
+      <br>
+      <div class="col-lg-4 col-md-4 panel panel-default panel-body listUser">
+        <div class="btn-group" data-toggle="buttons">
+          <div ng-repeat="x in customerListInLoung" ng-click="selectRow(x)">
+            <label class="btn btn-primary btn-md btn-block" >
+              <div class="row">
+                <div class="col-lg-2 col-md-2">
+                  <a href="{{ url_for('static', filename='') }}{% raw %}{{ x.tagId }}{% endraw %}.jpg">
+                    <img src="{{ url_for('static', filename='') }}{% raw %}{{ x.tagId }}{% endraw %}.jpg" class="img-rounded" width="50px">
+                  </a>
+                  <span class="badge">{% raw %}{{ x.tagId }}{% endraw %}</span>
+                </div>
+                <div class="col-lg-2 col-md-2">{% raw %}{{ x.lastName }}{% endraw %}</div>
+                <div class="col-lg-2 col-md-2">{% raw %}{{ x.firstName }}{% endraw %}</div>
+                <div class="col-lg-6 col-md-6">{% raw %}{{ x.trackingDate }}{% endraw %}</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div ng-if="selectedIdentifier" class="col-lg-8 col-md-8 panel panel-default panel-body detailUser">
+        <div class="col-lg-6 col-md-6">
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Nom : {% raw %}{{selectedCustomer.firstName}} {{selectedCustomer.lastName}}{% endraw %}</div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Date d'entrée : {% raw %}{{selectedCustomer.trackingDate}}{% endraw %}</div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Sexe : {% raw %}{{selectedCustomer.sex}}{% endraw %}</div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Langage : {% raw %}{{selectedCustomer.language}}{% endraw %}</div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Tel. : {% raw %}{{selectedCustomer.phone}}{% endraw %}</div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Email : {% raw %}{{selectedCustomer.email}}{% endraw %}</div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Anniversaire : {% raw %}{{selectedCustomer.birthday}}{% endraw %}</div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Vol : {% raw %}{{selectedCustomer.departureTime}} {{selectedCustomer.flightFrom}}-{{selectedCustomer.flightTo}}{% endraw %}</div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Repas : {% raw %}{{selectedCustomer.meal}}{% endraw %}</div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">Journal : {% raw %}{{selectedCustomer.newsPaper}}{% endraw %}</div>
+          </div>
+          <br>
+          <div ng-repeat="y in selectedCustomer.groupId">
+            <div class="row">
+            <div class="col-lg-12 col-md-12">Accompagnateurs : {% raw %}{{y.tagId}}{% endraw %}</div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6" style="margin-top: -400px; margin-left: 300px;">
+          <img src="{{ url_for('static', filename='') }}{% raw %}{{ selectedCustomer.tagId }}{% endraw %}.jpg" class="img-rounded" width="335px">
+        </div>
+      </div>
+    </div>
+  </body> 
+</html>
