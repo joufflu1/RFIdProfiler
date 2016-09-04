@@ -36,6 +36,7 @@ Next, install the software on the Pi3 that will act as the host access point :
 > sudo apt-get update
 > sudo apt-get install hostapd dnsmasq
 
+
 1.1- After the installation, set the DHCP server by configuring dnsmasq :
 
 The configuration is done in dnsmasq.conf file, execute the followong commands :
@@ -53,6 +54,7 @@ domain-needed        # Don't forward short names
 bogus-priv           # Never forward addresses in the non-routed address spaces.  
 dhcp-range=192.168.42.10,192.168.42.150,12h # Assign IP addresses between 172.24.1.50 and 172.24.1.150 with a 12 hour lease time
 
+
 1.2- Set up wlan0 interfce for static IP
 
 First run :
@@ -61,7 +63,7 @@ First run :
 
 > sudo vi /etc/network/interfaces 
 
-Find the line auto wlan0 and add a # in front of the line, and in front of every line afterwards. If you don't have that line, just make sure it looks like the screenshot below in the end! Basically just remove any old wlan0 configuration settings, we'll be changing them upDepending on your existing setup/distribution there might be more or less text and it may vary a little bit
+Find the line auto wlan0 and add a # in front of the line, and in front of every line afterwards. If you don't have that line, just make sure it looks like the screenshot below in the end! Basically just remove any old wlan0 configuration settings, we'll be changing them up Depending on your existing setup/distribution there might be more or less text and it may vary a little bit
 Add the lines
 	1. iface wlan0 inet static
 	2.  address 192.168.42.1
@@ -70,7 +72,8 @@ After allow-hotplug wlan0
 
 Assign a static IP address to the wifi adapter by running : 
 
-> sudo ifconfig wlan0 192.168.42.1
+> sudo ifconfig wlan0 192.168.42.1
+
 
 1.3- Configure the access point
 
@@ -100,12 +103,13 @@ Tell the Pi where to find this configuration file. Run :
 
 Find the line #DAEMON_CONF="" and edit it so it says 
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
-(Don't forget to remove the # in front to activate it!)
+(Don't forget to remove the # in front to activate it!)
+
 
 1.4- Configure Network Adress Translation
 
 Setting up NAT will allow multiple clients to connect to the WiFi and have all the data 'tunneled' through the single Ethernet IP.
-(But you should do it even if only one client is going to connect)
+(But you should do it even if only one client is going to connect)
 
 > sudo vi /etc/sysctl.conf
 
@@ -134,6 +138,7 @@ sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf
 
 You can try connecting and disconnecting from the Pi_AP with the password you set before (probably Raspberry if you copied our hostapd config), 
 debug text will display on the Pi console but you won't be able to connect through to the Ethernet connection yet. 
+
 
 1.5- Set a daemon to run everything at startup
 
