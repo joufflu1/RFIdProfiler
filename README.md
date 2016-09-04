@@ -22,8 +22,8 @@ All this software is needed for an independent operation :
 - gevent
 - gevent-websocket
 
-Installation instruction : 
 
+Installation instructions : 
 
 1- WIFI configuration
 
@@ -153,3 +153,25 @@ Then to make it so it runs every time on boot :
 > sudo update-rc.d isc-dhcp-server enable 
 
 
+2- Software stack installation
+
+If Python is not install, select version 2.7
+
+Install the following libraries and frameworks following the instructions on the following sites:
+
+Flask :
+http://flask.pocoo.org/docs/0.11/installation/
+
+MongoDb :
+http://andyfelong.com/2016/01/mongodb-3-0-9-binaries-for-raspberry-pi-2-jessie/
+
+Flask-Socket.io
+https://flask-socketio.readthedocs.io/en/latest/
+
+Flask-Mongoengine
+http://docs.mongoengine.org/projects/flask-mongoengine/en/latest/
+
+
+3- Sources
+
+nfcpy : https://nfcpy.readthedocs.io/en/latest/
