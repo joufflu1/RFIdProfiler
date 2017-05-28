@@ -27,6 +27,8 @@ Installation instructions :
 
 1- WIFI configuration
 
+from https://pimylifeup.com/raspberry-pi-wireless-access-point/ : 
+
 Setting up the Wireless Access Point
 As with most tutorials I do, this one just uses a clean version of Raspbian that has been updated to the latest packages.
 To setup the Raspberry Pi wireless access point we will be making the use of two packages. These two packages are hostapd and dnsmasq. hostapd is the package that allows us to utilize a Wi-Fi device as an access point, in our case we will be utilizing this to turn the Raspberry Pi 3’s Wi-Fi into our access point.
